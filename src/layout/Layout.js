@@ -1,8 +1,8 @@
 import React from 'react';
 import { Layout } from 'react-admin';
-import Menu from './Menu';
+import Menu from '../components/Menu/Menu';
 
-export default (props: any) => {
+const CustomLayout = (props) => {
     return (
         <Layout
             {...props}
@@ -10,3 +10,5 @@ export default (props: any) => {
         />
     );
 };
+
+export default CustomLayout;

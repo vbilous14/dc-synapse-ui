@@ -1,11 +1,14 @@
 import React from 'react';
-import { Admin, Resource, ShowGuesser } from 'react-admin';
+import { Admin } from 'react-admin';
 import jsonServerProvider from 'ra-data-json-server';
-import { Layout } from './layout';
+import Layout from './layout/Layout';
+import customSagas from './customSagas';
+import themes from './themes';
+import Operations from './pages/Operations/Operations';
+import { Route } from 'react-router-dom';
 
-import { PostList } from './posts';
-import { UserList } from './users';
-import Dashboard from './dashboard/Dashboard';
+import './App.css';
+
 import authProvider from './authProvider';
 
 const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
@@ -13,15 +16,20 @@ const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
 const App = () => {
     return (
         <Admin
+            theme={themes}
+            customSagas={customSagas}
             layout={Layout}
-            dashboard={Dashboard}
             dataProvider={dataProvider}
             authProvider={authProvider}
+            customRoutes={
+                [
+                    <Route exact path="/operations" component={Operations} />,
+                ]
+            }
         >
-            <Resource name="users" list={UserList} options={{ label: 'Users List' }} />
-            <Resource name="posts" list={PostList} options={{ label: 'Posts List' }} />
+            <div></div>
         </Admin>
     );
-}
+};
 
 export default App;
