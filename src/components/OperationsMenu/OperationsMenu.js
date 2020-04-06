@@ -1,12 +1,14 @@
 import React from 'react';
 import { MenuItemLink } from 'react-admin';
+import { useDispatch } from 'react-redux';
 
-import PersonIcon from '@material-ui/icons/Person';
-import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
-import FeedbackIcon from '@material-ui/icons/Feedback';
 import { makeStyles } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 import grey from '@material-ui/core/colors/grey';
+
+import addTabAction from '../../actions/addTab';
+
+import { OPERATIONS } from '../../constants/constants'
 
 const useStyles = makeStyles({
     root: {
@@ -19,27 +21,28 @@ const useStyles = makeStyles({
 });
 
 const OperationsMenu = () => {
+    const dispatch = useDispatch();
     const classes = useStyles();
+    const handleClick = (tab) => () => {
+        dispatch(addTabAction({
+            ...tab,
+            type: 'list'
+        }))
+    };
 
     return (
         <div className={classes.root}>
-            <MenuItemLink
-                to='/operations/members'
-                primaryText='Members'
-                leftIcon={<PersonIcon />}
-            />
-            <MenuItemLink
-                to='/operations/companies'
-                primaryText='Companies'
-                leftIcon={<BusinessCenterIcon />}
-            />
-            <MenuItemLink
-                to='/operations/claims'
-                primaryText='Claims'
-                leftIcon={<FeedbackIcon />}
-            />
+            {
+                OPERATIONS.map((operation, i) => <MenuItemLink
+                    key={i}
+                    to={operation.url}
+                    primaryText={operation.name}
+                    onClick={handleClick(operation)}
+                    leftIcon={<operation.icon />}
+                />)
+            }
         </div>
     )
-}
+};
 
 export default OperationsMenu;
