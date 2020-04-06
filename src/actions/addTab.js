@@ -1,8 +1,8 @@
-import { NEW_TAB } from '../types/types'
+import { ADD_TAB } from '../types/types'
 
 export default function (tab) {
     return {
-        type: NEW_TAB,
+        type: ADD_TAB,
         payload: {
             ...tab,
             id: Date.now()

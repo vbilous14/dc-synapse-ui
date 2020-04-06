@@ -2,7 +2,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import FeedbackIcon from '@material-ui/icons/Feedback';
 
-import { TextField, EmailField, BooleanField } from 'react-admin';
+import { TextField, EmailField, BooleanField, TextInput, BooleanInput } from 'react-admin';
 
 export const OPERATIONS = [
     {
@@ -19,7 +19,18 @@ export const OPERATIONS = [
             { component: TextField, source: 'phone' },
             { component: TextField, source: 'website' },
             { component: TextField, source: 'company.name' }
-        ]
+        ],
+        editFields: [
+            { component: TextInput, source: 'name' },
+            { component: TextInput, source: 'username' },
+            { component: TextInput, source: 'email' },
+            { component: TextInput, source: 'address.street' },
+            { component: TextInput, source: 'phone' },
+            { component: TextInput, source: 'website' },
+            { component: TextInput, source: 'company.name' }
+        ],
+        type: 'list',
+        subtype: 'card'
     },
     {
         url: '/operations/companies',
@@ -31,7 +42,14 @@ export const OPERATIONS = [
             { component: TextField, source: 'name' },
             { component: EmailField, source: 'email' },
             { component: EmailField, source: 'body' },
-        ]
+        ],
+        editFields: [
+            { component: TextInput, source: 'name' },
+            { component: TextInput, source: 'email' },
+            { component: TextInput, source: 'body' },
+        ],
+        type: 'list',
+        subtype: 'card'
     },
     {
         url: '/operations/claims',
@@ -42,6 +60,12 @@ export const OPERATIONS = [
             { component: TextField, source: 'id' },
             { component: TextField, source: 'title' },
             { component: BooleanField, source: 'completed' }
-        ]
+        ],
+        editFields: [
+            { component: TextInput, source: 'title' },
+            { component: BooleanInput, source: 'completed' }
+        ],
+        type: 'list',
+        subtype: 'card'
     }
 ];

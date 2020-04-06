@@ -13,8 +13,6 @@ import createAdminStore from './store/createAdminStore';
 
 import { OPERATIONS } from './constants/constants'
 
-import './App.css';
-
 import authProvider from './authProvider';
 
 const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');

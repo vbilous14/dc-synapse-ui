@@ -2,18 +2,21 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { List, Datagrid } from 'react-admin';
+import { useDispatch } from 'react-redux';
 
 import { withRouter } from 'react-router-dom';
+import addTabAction from '../../actions/addTab';
 
-export const UserList = ({ fields, ...restProps }) => (
+export const ItemsList = ({ fields, onRowClick, ...restProps }) => (
     <List {...restProps}>
-        <Datagrid rowClick='edit'>
+        <Datagrid rowClick={onRowClick}>
             {fields.map((field, i) => <field.component key={i} source={field.source} />)}
         </Datagrid>
     </List>
 );
 
 const ListTab = ({ tab, history }) => {
+    const dispatch = useDispatch();
     const listProps = {
         basePath: tab.url,
         hasCreate: false,
@@ -31,6 +34,16 @@ const ListTab = ({ tab, history }) => {
         page: 1,
         perPage: 10
     });
+    const handleRowClick = (id, url, dataObj) => {
+        dispatch(addTabAction({
+            url,
+            editFields: tab.editFields,
+            name: dataObj.name || dataObj.title,
+            data: tab.data,
+            dataId: id,
+            type: tab.subtype
+        }))
+    };
 
     useEffect(() => {
         const unlisten = history.listen((location) => {
@@ -55,7 +68,13 @@ const ListTab = ({ tab, history }) => {
     }, []);
 
     return <div>
-        <UserList {...listProps} {...dynamicListProps} history={history} fields={tab.fields} />
+        <ItemsList
+            {...listProps}
+            {...dynamicListProps}
+            history={history}
+            fields={tab.fields}
+            onRowClick={handleRowClick}
+        />
     </div>;
 };
 

@@ -1,2 +1,2 @@
-export const
-    NEW_TAB = 'NEW_TAB';
+export const ADD_TAB = 'ADD_TAB';
+export const REMOVE_TAB = 'REMOVE_TAB';

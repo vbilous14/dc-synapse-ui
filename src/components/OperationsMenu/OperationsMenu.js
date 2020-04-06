@@ -23,11 +23,8 @@ const useStyles = makeStyles({
 const OperationsMenu = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
-    const handleClick = (tab) => () => {
-        dispatch(addTabAction({
-            ...tab,
-            type: 'list'
-        }))
+    const handleClick = tab => () => {
+        dispatch(addTabAction(tab))
     };
 
     return (
