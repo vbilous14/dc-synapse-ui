@@ -6,6 +6,7 @@ import customSagas from './customSagas';
 import themes from './themes';
 import Operations from './pages/Operations/Operations';
 import Profile from './pages/Profile/Profile';
+import Members from './pages/Members/Members';
 import { Route } from 'react-router-dom';
 
 import './App.css';
@@ -26,6 +27,7 @@ const App = () => {
                 [
                     <Route exact path="/profile" component={Profile} />,
                     <Route exact path="/operations" component={Operations} />,
+                    <Route exact path="/operations/members" component={Members} />,
                 ]
             }
         >
