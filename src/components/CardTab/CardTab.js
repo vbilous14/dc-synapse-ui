@@ -1,30 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Edit, SimpleForm, showNotification as showNotificationAction, TopToolbar, ShowButton } from 'react-admin';
+import { Edit, SimpleForm, showNotification as showNotificationAction, SaveButton, DeleteButton, Toolbar } from 'react-admin';
 
 import { withRouter } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-export const Card = ({ fields, actions, ...restProps }) => (
+import removeTabAction from '../../actions/removeTab';
+
+export const Card = ({ fields, actions, toolbar, ...restProps }) => (
     <Edit {...restProps} actions={actions}>
-        <SimpleForm>
+        <SimpleForm toolbar={toolbar}>
             {fields.map((field, i) => <field.component key={i} source={field.source} />)}
         </SimpleForm>
     </Edit>
 );
 
-const CardActions = ({ basePath, data, resource }) => {
+const CardActions = ({ onSave, onRemove, ...restProps }) => {
     return (
-        <TopToolbar>
-            <ShowButton basePath={basePath} record={data} />
-            {/* Add your custom actions */}
-            {/*<Button color="primary" onClick={customAction}>Custom Action</Button>*/}
-        </TopToolbar>
+        <Toolbar {...restProps} >
+            <SaveButton
+                onSave={onSave}
+                redirect={false}
+                label="Save"
+            />
+            <DeleteButton
+                onClick={onRemove}
+                redirect={false}
+                label="Remove"
+            />
+        </Toolbar>
     );
 };
 
-const CardTab = ({ tab, history }) => {
+const CardTab = ({ tab, tabIndex, history }) => {
     const dispatch = useDispatch();
     const editProps = {
         basePath: `${tab.url}/${tab.dataId}`,
@@ -37,19 +46,23 @@ const CardTab = ({ tab, history }) => {
     const handleSave = () => {
         dispatch(showNotificationAction('Data saved successfully'));
     };
+    const handleRemove = () => {
+        dispatch(removeTabAction(tabIndex));
+    };
 
     return <div>
         <Card
             {...editProps}
             history={history}
             fields={tab.editFields}
-            toolbar={<CardActions />}
+            toolbar={<CardActions onSave={handleSave} onRemove={handleRemove} />}
         />
     </div>;
 };
 
 CardTab.propTypes = {
-    tab: PropTypes.object
+    tab: PropTypes.object,
+    tabIndex: PropTypes.number.isRequired
 };
 
 CardTab.defaultProps = {

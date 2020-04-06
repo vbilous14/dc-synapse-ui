@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import ListTab from '../ListTab/ListTab';
 import CardTab from '../CardTab/CardTab';
 
-const TabContent = ({ tab }) => {
+const TabContent = ({ tab, tabIndex }) => {
     if (tab.type === 'list') {
-        return <ListTab tab={tab} />
+        return <ListTab tab={tab} tabIndex={tabIndex} />
     }
 
     if (tab.type === 'card') {
-        return <CardTab tab={tab} />
+        return <CardTab tab={tab} tabIndex={tabIndex} />
     }
 
     return (
@@ -19,7 +19,8 @@ const TabContent = ({ tab }) => {
 };
 
 TabContent.propTypes = {
-    tab: PropTypes.object
+    tab: PropTypes.object,
+    tabIndex: PropTypes.number.isRequired
 };
 
 TabContent.defaultProps = {

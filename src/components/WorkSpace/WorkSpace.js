@@ -49,14 +49,14 @@ const WorkSpace = () => {
 
     useEffect(() => {
         if (tabs.length > prevTabs.length) {
-            setTab(tabs.length - 1);
-
-            prevTabs = tabs;
+            setTab(tabs.length - 1)
         } else if (tabs.length < prevTabs.length) {
-            const newTab = tab >= tabs.length - 1 ? tabs.length - 1 : tab + 1;
+            const newTab = tab === tabs.length ? tabs.length - 1 : tab;
 
             setTab(newTab);
         }
+
+        prevTabs = tabs;
     }, [tabs]);
 
     return (
@@ -77,7 +77,7 @@ const WorkSpace = () => {
                    }
                </Tabs>
            </AppBar>
-           <TabContent tab={tabs[tab]}/>
+           <TabContent tab={tabs[tab]} tabIndex={tab} />
        </div>
     )
 };
