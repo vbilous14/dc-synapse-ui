@@ -5,6 +5,7 @@ import Layout from './layout/Layout';
 import customSagas from './customSagas';
 import themes from './themes';
 import Operations from './pages/Operations/Operations';
+import Profile from './pages/Profile/Profile';
 import { Route } from 'react-router-dom';
 
 import './App.css';
@@ -23,6 +24,7 @@ const App = () => {
             authProvider={authProvider}
             customRoutes={
                 [
+                    <Route exact path="/profile" component={Profile} />,
                     <Route exact path="/operations" component={Operations} />,
                 ]
             }
