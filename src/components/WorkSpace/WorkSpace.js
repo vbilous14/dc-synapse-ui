@@ -34,8 +34,8 @@ const WorkSpace = () => {
                        tabs.map(tab => <Tab label={tab.name} key={tab.id} />)
                    }
                </Tabs>
-               <TabContent tab={tabs[tab]}/>
            </AppBar>
+           <TabContent tab={tabs[tab]}/>
        </div>
     )
 };
