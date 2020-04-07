@@ -50,7 +50,7 @@ const OperationsMenu = () => {
     const dispatch = useDispatch();
     const tabs = useSelector(({ application }) => application.tabs);
     const classes = useStyles();
-    const handleClick = tab => event => {
+    const handleClick = tab => () => {
         const tabId = tab.data;
         const newActiveTabIndex = findIndex((tab => tab.id === tabId), tabs);
 

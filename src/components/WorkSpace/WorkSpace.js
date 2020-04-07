@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import removeTabAction from '../../actions/removeTab';
+import setActiveTab from '../../actions/setActiveTab';
 
 import TabContent from '../TabContent/TabContent';
 
@@ -33,16 +34,14 @@ const useStyles = makeStyles({
 });
 
 let prevTabs = [];
-let prevActiveTab = 0;
 
 const WorkSpace = () => {
     const dispatch = useDispatch();
-    const [tab, setTab] = useState(0);
     const classes = useStyles();
     const tabs = useSelector(({ application }) => application.tabs);
     const activeTab = useSelector(({ application }) => application.activeTab);
     const handleChange = (event, newTab) => {
-        setTab(newTab);
+        dispatch(setActiveTab(newTab));
     };
 
     const handleTabDelete = tab => () => {
@@ -50,20 +49,12 @@ const WorkSpace = () => {
     };
 
     useEffect(() => {
-        if (prevActiveTab !== activeTab) {
-            setTab(activeTab)
-        }
-
-        prevActiveTab = activeTab;
-    }, [activeTab]);
-
-    useEffect(() => {
         if (tabs.length > prevTabs.length) {
-            setTab(tabs.length - 1)
+            dispatch(setActiveTab(tabs.length - 1));
         } else if (tabs.length < prevTabs.length) {
-            const newTab = tab === tabs.length ? tabs.length - 1 : tab;
+            const newTab = activeTab === tabs.length ? tabs.length - 1 : activeTab;
 
-            setTab(newTab);
+            dispatch(setActiveTab(newTab));
         }
 
         prevTabs = tabs;
@@ -73,7 +64,7 @@ const WorkSpace = () => {
        <div className={classes.root}>
            <AppBar position='static' color='default'>
                <Tabs
-                   value={tab}
+                   value={activeTab}
                    onChange={handleChange}
                    variant='scrollable'
                >
@@ -87,7 +78,7 @@ const WorkSpace = () => {
                    }
                </Tabs>
            </AppBar>
-           <TabContent tab={tabs[tab]} tabIndex={tab} />
+           <TabContent tab={tabs[activeTab]} tabIndex={activeTab} />
        </div>
     )
 };
