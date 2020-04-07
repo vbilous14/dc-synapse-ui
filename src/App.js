@@ -4,9 +4,8 @@ import { Provider } from 'react-redux';
 import jsonServerProvider from 'ra-data-json-server';
 import Layout from './layout/Layout';
 import themes from './themes';
-import Operations from './pages/Operations/Operations';
 import Profile from './pages/Profile/Profile';
-import Operation from './pages/Operation/Operation';
+import Operations from './pages/Operations/Operations';
 import { Route } from 'react-router-dom';
 import { createHashHistory } from 'history';
 import createAdminStore from './store/createAdminStore';
@@ -36,8 +35,7 @@ const App = () => {
                 customRoutes={
                     [
                         <Route exact path='/profile' component={Profile} />,
-                        <Route exact path='/operations' component={Operations} />,
-                        ...OPERATIONS.map(operation => <Route exact path={operation.url} component={Operation} />,)
+                        <Route exact path='/operations' component={Operations} />
                     ]
                 }
             >

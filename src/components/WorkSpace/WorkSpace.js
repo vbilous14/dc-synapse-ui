@@ -33,12 +33,14 @@ const useStyles = makeStyles({
 });
 
 let prevTabs = [];
+let prevActiveTab = 0;
 
 const WorkSpace = () => {
     const dispatch = useDispatch();
     const [tab, setTab] = useState(0);
     const classes = useStyles();
     const tabs = useSelector(({ application }) => application.tabs);
+    const activeTab = useSelector(({ application }) => application.activeTab);
     const handleChange = (event, newTab) => {
         setTab(newTab);
     };
@@ -46,6 +48,14 @@ const WorkSpace = () => {
     const handleTabDelete = tab => () => {
         dispatch(removeTabAction(tab))
     };
+
+    useEffect(() => {
+        if (prevActiveTab !== activeTab) {
+            setTab(activeTab)
+        }
+
+        prevActiveTab = activeTab;
+    }, [activeTab]);
 
     useEffect(() => {
         if (tabs.length > prevTabs.length) {

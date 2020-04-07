@@ -1,10 +1,12 @@
 import {
     ADD_TAB,
-    REMOVE_TAB
+    REMOVE_TAB,
+    SET_ACTIVE_TAB,
 } from '../types/types';
 
 const initialState = {
-    tabs: []
+    tabs: [],
+    activeTab: 0
 };
 
 export default function (state = initialState, action) {
@@ -26,6 +28,8 @@ export default function (state = initialState, action) {
                 ...state,
                 tabs: newTabs
             };
+        case SET_ACTIVE_TAB:
+            return { ...state, activeTab: action.payload };
     default:
         return state;
     }

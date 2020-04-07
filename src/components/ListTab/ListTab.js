@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { List, Datagrid } from 'react-admin';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { withRouter } from 'react-router-dom';
 import addTabAction from '../../actions/addTab';
+import setActiveTab from '../../actions/setActiveTab';
+
+import findIndex from '../../utils/findIndex';
 
 export const ItemsList = ({ fields, onRowClick, ...restProps }) => (
     <List {...restProps}>
@@ -17,6 +20,7 @@ export const ItemsList = ({ fields, onRowClick, ...restProps }) => (
 
 const ListTab = ({ tab, history }) => {
     const dispatch = useDispatch();
+    const tabs = useSelector(({ application }) => application.tabs);
     const listProps = {
         basePath: tab.url,
         hasCreate: false,
@@ -35,13 +39,22 @@ const ListTab = ({ tab, history }) => {
         perPage: 10
     });
     const handleRowClick = (id, url, dataObj) => {
+        const tabId = `${tab.data}-${id}`;
+        const newActiveTabIndex = findIndex((tab => tab.id === tabId), tabs)
+
+        if (newActiveTabIndex > -1) {
+            dispatch(setActiveTab(newActiveTabIndex));
+            return;
+        }
+
         dispatch(addTabAction({
             url,
             editFields: tab.editFields,
             name: dataObj.name || dataObj.title,
             data: tab.data,
             dataId: id,
-            type: tab.subtype
+            type: tab.subtype,
+            id: tabId
         }))
     };
 

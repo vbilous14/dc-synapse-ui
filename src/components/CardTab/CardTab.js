@@ -26,6 +26,7 @@ const CardActions = ({ onSave, onRemove, ...restProps }) => {
             />
             <DeleteButton
                 onClick={onRemove}
+                undoable={false}
                 redirect={false}
                 label="Remove"
             />
