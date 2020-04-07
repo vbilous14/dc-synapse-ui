@@ -54,6 +54,7 @@ const ListTab = ({ tab, history }) => {
             data: tab.data,
             dataId: id,
             type: tab.subtype,
+            steps: tab.steps,
             id: tabId
         }))
     };

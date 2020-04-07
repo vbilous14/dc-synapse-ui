@@ -69,7 +69,7 @@ const WorkSpace = () => {
                    variant='scrollable'
                >
                    {
-                       tabs.map((tabInfo, i) => <div className={classes.tabWrapper}>
+                       tabs.map((tabInfo, i) => <div className={classes.tabWrapper} key={i}>
                            <Tab label={tabInfo.name} key={tabInfo.id} onClick={(event) => handleChange(event, i) } />
                            <IconButton aria-label='Delete' className={classes.tabRemoveButton} onClick={handleTabDelete(i)}>
                                <DeleteIcon/>

@@ -61,11 +61,28 @@ export const OPERATIONS = [
             { component: TextField, source: 'title' },
             { component: BooleanField, source: 'completed' }
         ],
-        editFields: [
-            { component: TextInput, source: 'title' },
-            { component: BooleanInput, source: 'completed' }
+        steps: [
+            {
+                editFields: [
+                    { component: TextInput, source: 'title' }
+                ],
+                files: [
+                    { name: 'Photos', value: 'photo' },
+                    { name: 'Docs', value: 'pdf' }
+                ],
+                name: 'Step 1'
+            },
+            {
+                editFields: [
+                    { component: BooleanInput, source: 'completed' }
+                ],
+                files: [
+                    { name: 'Docs', value: 'pdf' }
+                ],
+                name: 'Step 2'
+            }
         ],
         type: 'list',
-        subtype: 'card'
+        subtype: 'steps'
     }
 ];

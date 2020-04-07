@@ -1,8 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { MenuItemLink, ListItemIcon } from 'react-admin';
-
 import { makeStyles } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 import grey from '@material-ui/core/colors/grey';
@@ -10,8 +8,8 @@ import grey from '@material-ui/core/colors/grey';
 import addTabAction from '../../actions/addTab';
 
 import { OPERATIONS } from '../../constants/constants'
-import findIndex from "../../utils/findIndex";
-import setActiveTab from "../../actions/setActiveTab";
+import findIndex from '../../utils/findIndex';
+import setActiveTab from '../../actions/setActiveTab';
 
 const useStyles = makeStyles({
     root: {

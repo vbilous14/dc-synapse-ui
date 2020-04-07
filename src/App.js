@@ -14,7 +14,8 @@ import { OPERATIONS } from './constants/constants'
 
 import authProvider from './authProvider';
 
-const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+// const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+const dataProvider = jsonServerProvider('https://my-json-server.typicode.com/vbilous-upwork/dc-synapse-ui-mocks'); // For claims testing
 const history = createHashHistory();
 
 const App = () => {
