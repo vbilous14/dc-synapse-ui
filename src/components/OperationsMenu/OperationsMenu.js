@@ -15,6 +15,7 @@ import setActiveTab from "../../actions/setActiveTab";
 
 const useStyles = makeStyles({
     root: {
+        boxSizing: 'border-box',
         backgroundColor: blue[50],
         paddingTop: '8px',
         height: '100%',
