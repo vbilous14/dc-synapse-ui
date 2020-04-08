@@ -55,6 +55,7 @@ const ListTab = ({ tab, history }) => {
             dataId: id,
             type: tab.subtype,
             steps: tab.steps,
+            rightPanel: tab.rightPanel,
             id: tabId
         }))
     };
@@ -81,15 +82,13 @@ const ListTab = ({ tab, history }) => {
         }
     }, []);
 
-    return <div>
-        <ItemsList
-            {...listProps}
-            {...dynamicListProps}
-            history={history}
-            fields={tab.fields}
-            onRowClick={handleRowClick}
-        />
-    </div>;
+    return <ItemsList
+        {...listProps}
+        {...dynamicListProps}
+        history={history}
+        fields={tab.fields}
+        onRowClick={handleRowClick}
+    />;
 };
 
 ListTab.propTypes = {

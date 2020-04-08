@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux'
 
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+
+import RightPanel from '../RightPanel/RightPanel'
 
 import removeTabAction from '../../actions/removeTab';
 import setActiveTab from '../../actions/setActiveTab';
@@ -16,7 +17,9 @@ import TabContent from '../TabContent/TabContent';
 
 const useStyles = makeStyles({
     root: {
-        width: '100%'
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column'
     },
     tabWrapper: {
         minHeight: '100%',
@@ -30,6 +33,13 @@ const useStyles = makeStyles({
         opacity: '0',
         marginLeft: '-35px',
         alignSelf: 'center'
+    },
+    tabContentWithRightPanel: {
+        display: 'flex',
+        height: '100%'
+    },
+    tabContent: {
+        flex: '1'
     }
 });
 
@@ -59,6 +69,9 @@ const WorkSpace = () => {
 
         prevTabs = tabs;
     }, [tabs]);
+    const tab = tabs[activeTab] || {};
+    const { data: dataObj } = useSelector(({ admin }) => (admin.resources[tab.data] || { data: {} }));
+    const data = (dataObj || {})[tab.dataId] || {};
 
     return (
        <div className={classes.root}>
@@ -78,7 +91,12 @@ const WorkSpace = () => {
                    }
                </Tabs>
            </AppBar>
-           <TabContent tab={tabs[activeTab]} tabIndex={activeTab} />
+           <div className={classes.tabContentWithRightPanel}>
+               <div className={classes.tabContent}>
+                   <TabContent tab={tab} tabIndex={activeTab} />
+               </div>
+               {data.rightPanel && tab.rightPanel && <RightPanel data={data.rightPanel} tab={tab} />}
+           </div>
        </div>
     )
 };

@@ -2,7 +2,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import FeedbackIcon from '@material-ui/icons/Feedback';
 
-import { TextField, EmailField, BooleanField, TextInput, BooleanInput } from 'react-admin';
+import { TextField, EmailField, BooleanField, DateField, TextInput, BooleanInput } from 'react-admin';
 
 export const OPERATIONS = [
     {
@@ -30,7 +30,13 @@ export const OPERATIONS = [
             { component: TextInput, source: 'company.name' }
         ],
         type: 'list',
-        subtype: 'card'
+        subtype: 'card',
+        rightPanel: {
+            title: 'Member info',
+            fields: [
+                { component: DateField, source: 'date' }
+            ]
+        }
     },
     {
         url: '/operations/companies',
@@ -58,7 +64,7 @@ export const OPERATIONS = [
         icon: FeedbackIcon,
         fields: [
             { component: TextField, source: 'id' },
-            { component: TextField, source: 'title' },
+            { component: TextField, source: 'titl\e' },
             { component: BooleanField, source: 'completed' }
         ],
         steps: [
@@ -83,6 +89,12 @@ export const OPERATIONS = [
             }
         ],
         type: 'list',
-        subtype: 'steps'
+        subtype: 'steps',
+        rightPanel: {
+            title: 'Claim info',
+            fields: [
+                { component: DateField, source: 'date' }
+            ]
+        }
     }
 ];

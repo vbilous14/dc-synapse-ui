@@ -63,8 +63,6 @@ export const Step = ({ step, actions, toolbar, data, ...restProps }) => {
         setFileType(event.target.value)
     };
 
-    console.log(activeFileType);
-
     return (
         <div className={classes.root}>
             <div className={classes.stepForm}>
