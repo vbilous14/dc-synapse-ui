@@ -58,7 +58,6 @@ const Photos = ({ files }) => {
         }
     }, PLAY_DURATION);
     const goToNextSlide = () => {
-        console.log(activeSlide);
         return setActiveSlide(activeSlide === files.length - 1 ? 0 : activeSlide + 1);
     };
     const handleControlButtonClick = direction => () => {
