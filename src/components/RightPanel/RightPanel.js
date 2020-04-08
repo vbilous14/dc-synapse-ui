@@ -16,6 +16,9 @@ const useStyles = makeStyles({
         paddingTop: '8px',
         width: '200px',
         borderLeft: `2px solid ${grey[800]}`
+    },
+    title: {
+        width: 'auto'
     }
 });
 
@@ -25,7 +28,7 @@ const RightPanel = ({ data, tab }) => {
     return (
         <div className={classes.root}>
             <SimpleForm record={data} toolbar={<div />}>
-                <Typography variant='h6'>{tab.rightPanel.title}</Typography>
+                <Typography variant='h6' className={classes.title}>{tab.rightPanel.title}</Typography>
                 {tab.rightPanel.fields.map((field, i) => <field.component key={i} source={field.source} />)}
             </SimpleForm>
         </div>
