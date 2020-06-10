@@ -6,7 +6,6 @@ import { TextField, EmailField, BooleanField, DateField, TextInput, BooleanInput
 
 export const OPERATIONS = [
     {
-        url: '/operations/members',
         name: 'Members',
         data: 'users',
         icon: PersonIcon,
@@ -39,7 +38,6 @@ export const OPERATIONS = [
         }
     },
     {
-        url: '/operations/companies',
         name: 'Companies',
         data: 'comments',
         icon: BusinessCenterIcon,
@@ -58,13 +56,12 @@ export const OPERATIONS = [
         subtype: 'card'
     },
     {
-        url: '/operations/claims',
         name: 'Claims',
         data: 'todos',
         icon: FeedbackIcon,
         fields: [
             { component: TextField, source: 'id' },
-            { component: TextField, source: 'titl\e' },
+            { component: TextField, source: 'title' },
             { component: BooleanField, source: 'completed' }
         ],
         steps: [
